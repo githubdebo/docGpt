@@ -96,6 +96,7 @@ app.post("/api/pdf-upload", upload.single("file"), async (req, res) => {
     });
 
     console.log("Successfully uploaded to database");
+    return res.status(200).json({ result: {'msg': 'uploaded'} });
   }
 });
   

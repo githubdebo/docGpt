@@ -9,7 +9,7 @@ const MessageItem = ({ message, pngFile, isLast }) => {
   return (
     <div className={`flex flex-col ${isLast ? "flex-grow" : ""}`}>
       <div
-        className={`message-card p-4 flex mb-4 ${message.type === "user" ? "justify-end bg-gray-300" : "bg-gray-200"}`}
+        className={`message-card p-4 flex mb-4 ${message.type === "user" ? "justify-end bg-gray-400 font-semibold" : "bg-gray-300 font-semibold"}`}
       >
         {message.type === "user" ? (
           <>
@@ -42,7 +42,7 @@ const MessageItem = ({ message, pngFile, isLast }) => {
               />
             </div>
             <p className="bot" style={{ maxWidth: "90%" }}>
-              {message.text}
+            {message.isTyping ? "typing..." : message.text}
             </p>
           </>
         )}
