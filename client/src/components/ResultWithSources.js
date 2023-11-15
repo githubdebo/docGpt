@@ -8,24 +8,44 @@ const MessageItem = ({ message, pngFile, isLast }) => {
 
   return (
     <div className={`flex flex-col ${isLast ? "flex-grow" : ""}`}>
-      <div className="flex mb-4">
-        <div className="rounded mr-4 h-10 w-10 relative overflow-hidden">
-          <img
-            src={message.type === "user" ? userImage : botImage}
-            alt={`${message.type}'s profile`}
-            width={32}
-            height={32}
-            className="rounded"
-            priority
-            unoptimized
-          />
-        </div>
-        <p
-          className={message.type === "user" ? "user" : "bot"}
-          style={{ maxWidth: "90%" }}
-        >
-          {message.text}
-        </p>
+      <div
+        className={`message-card p-4 flex mb-4 ${message.type === "user" ? "justify-end bg-gray-300" : "bg-gray-200"}`}
+      >
+        {message.type === "user" ? (
+          <>
+            <p className="user" style={{ maxWidth: "90%" }}>
+              {message.text}
+            </p>
+            <div className="rounded ml-4 h-10 w-10 relative overflow-hidden">
+              <img
+                src={userImage}
+                alt={`${message.type}'s profile`}
+                width={32}
+                height={32}
+                className="rounded"
+                priority
+                unoptimized
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="rounded mr-4 h-10 w-10 relative overflow-hidden">
+              <img
+                src={botImage}
+                alt={`${message.type}'s profile`}
+                width={32}
+                height={32}
+                className="rounded"
+                priority
+                unoptimized
+              />
+            </div>
+            <p className="bot" style={{ maxWidth: "90%" }}>
+              {message.text}
+            </p>
+          </>
+        )}
       </div>
 
       {message.sourceDocuments && (
@@ -72,9 +92,9 @@ const ResultWithSources = ({ messages, pngFile, maxMsgs }) => {
   return (
     <div
       ref={messagesContainerRef}
-      className={`bg-white p-10 rounded-3xl shadow-lg mb-8 overflow-y-auto h-[320px] max-h-[320px] flex flex-col space-y-4 ${
+      className={`mb-8 overflow-y-auto flex flex-col space-y-4 ${
         messages.length < maxMsgToScroll && "justify-end"
-      }`}
+      } message-container`}
     >
       {messages &&
         messages.map((message, index) => (

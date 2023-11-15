@@ -18,7 +18,7 @@ const PromptBox = ({
   };
   return (
     <>
-      <div className="flex items-center">
+      <div className="flex items-center querytext">
         {labelText && (
           <label htmlFor="" className="mr-4">
             {labelText}
@@ -37,13 +37,13 @@ const PromptBox = ({
         {!disableButton && (
           <button
             onClick={handleSubmit}
-            className="py-6 px-6 bg-white shadow text-gray-900 font-semibold rounded-full hover:shadow-xl transition-colors duration-200 uppercase"
+            className="bg-white shadow text-gray-900 font-semibold rounded-full hover:shadow-xl transition-colors duration-200 uppercase send-button"
           >
             {buttonText || "Enter"}
           </button>
         )}
       </div>
-      <p className={`text-red-500 ${error ? "block" : "hidden"}`}>{error}</p>
+      {/* <p className={`text-red-500 ${error ? "block" : "hidden"}`}>{error}</p> */}
     </>
   );
 };

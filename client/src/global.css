@@ -2,10 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
-.content{
+/* .content{
     padding:25px;
-}
+} */
 
-#root{
-    background-color: darkcyan;
-}
+body {
+    font-family: 'Your Font', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100vh; /* Set body height to full viewport height */
+    display: flex;
+    flex-direction: column;
+    background-color: floralwhite;
+  }
+
+  .content {
+    flex: 1; /* Allow the content to grow and fill the available space */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  input[type="file"],
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+
+  button {
+    padding: 12px 24px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #ddd;
+  }
+
+  .bot {
+    max-width: 90%;
+  }
+
+  .message-container{
+    height: 320px;
+    max-height: 320px;
+  }
+
+  .message-card{
+    border-radius:10px;
+  }
+
+  .bot{
+    margin-top: 5px;
+  }
+
+  .user{
+    margin-top: 5px;
+  }
+
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+
+    .bot {
+      max-width: 100%;
+    }
+  }
+
+  .send-button{
+    margin-bottom: 10px;
+  }
+
+  .querytext {
+      height: 41px;
+  }
+
+  ::-webkit-scrollbar {
+      width: 4px;
+      /* Set your desired width */
+  }
+
+  /* For Webkit browsers (Chrome, Safari) */
+  ::-webkit-scrollbar-thumb {
+      background-color: #888;
+      /* Set your desired color */
+  }
+
+  @media screen and (min-width: 1300px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+
+    .bot {
+      max-width: 100%;
+    }
+
+    .message-container{
+        height: 550px;
+        max-height: 600px;
+      }
+  }
