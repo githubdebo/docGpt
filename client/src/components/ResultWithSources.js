@@ -7,16 +7,13 @@ const MessageItem = ({ message, pngFile, isLast }) => {
   const [showSources, setShowSources] = useState(false);
 
   return (
-    <div className={`flex flex-col ${isLast ? "flex-grow" : ""}`}>
+    <div className={`flex flex-col ${message.type === "user"?"mr-1 items-end" : "ml-1 items-start"} ${isLast ? "flex-grow" : ""}`}>
       <div
-        className={`message-card p-4 flex mb-4 ${message.type === "user" ? "justify-end bg-gray-400 font-semibold" : "bg-gray-300 font-semibold"}`}
+        className={`message-card p-3 flex mb-4 ${message.type === "user" ? "justify-end bg-gray-50" : "bg-blue-600 text-white"}`}
       >
         {message.type === "user" ? (
           <>
-            <p className="user" style={{ maxWidth: "90%" }}>
-              {message.text}
-            </p>
-            <div className="rounded ml-4 h-10 w-10 relative overflow-hidden">
+          <div className="rounded h-10 w-10 relative overflow-hidden">
               <img
                 src={userImage}
                 alt={`${message.type}'s profile`}
@@ -27,10 +24,13 @@ const MessageItem = ({ message, pngFile, isLast }) => {
                 unoptimized
               />
             </div>
+            <p className="user" style={{ maxWidth: "90%" }}>
+              {message.text}
+            </p>
           </>
         ) : (
           <>
-            <div className="rounded mr-4 h-10 w-10 relative overflow-hidden">
+            <div className="rounded h-10 w-10 relative overflow-hidden">
               <img
                 src={botImage}
                 alt={`${message.type}'s profile`}
@@ -51,7 +51,7 @@ const MessageItem = ({ message, pngFile, isLast }) => {
       {message.sourceDocuments && (
         <div className="mb-6">
           <button
-            className="text-gray-600 text-sm font-bold"
+            className="text-gray-600 text-sm font-bold rounded hover:border-gray-300 hover:bg-gray-400 hover:text-white"
             onClick={() => setShowSources(!showSources)}
           >
             Source Documents {showSources ? "(Hide)" : "(Show)"}
@@ -62,9 +62,9 @@ const MessageItem = ({ message, pngFile, isLast }) => {
                 <h3 className="text-gray-600 text-sm font-bold">
                   Source {docIndex + 1}:
                 </h3>
-                <p className="text-gray-800 text-sm mt-2">
+                {/* <p className="text-gray-800 text-sm mt-2">
                   {document.pageContent}
-                </p>
+                </p> */}
                 <pre className="text-xs text-gray-500 mt-2">
                   {JSON.stringify(document.metadata, null, 2)}
                 </pre>

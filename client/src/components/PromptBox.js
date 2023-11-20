@@ -52,7 +52,7 @@ const PromptBox = ({
               className={
                 isDisabled
                   ? `bg-white font-bold rounded py-2 px-6 inline-flex items-center send-button`
-                  : `bg-white text-gray-800 font-bold rounded border-b-2  hover:border-green-500 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center send-button`
+                  : `bg-white text-gray-800 font-bold rounded border-b-2  hover:border-blue-600 hover:bg-blue-600 hover:text-white shadow-md py-2 px-6 inline-flex items-center send-button`
               }
             >
               <span class="mr-2">{buttonText || "Send"}</span>
@@ -76,7 +76,6 @@ const PromptBox = ({
           </div>
         )}
       </div>
-      {/* <p className={`text-red-500 ${error ? "block" : "hidden"}`}>{error}</p> */}
     </>
   );
 };
