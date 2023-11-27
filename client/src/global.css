@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .content{
-    padding:25px;
-} */
-
 body {
     font-family: 'Your Font', sans-serif;
     margin: 0;
@@ -16,15 +12,10 @@ body {
     flex-direction: column;
     --tw-bg-opacity: 1;
     background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-    /* background-color: floralwhite; */
-    /* background-color: rgb(165 180 252); */
   }
 
   .content {
     flex: 1; /* Allow the content to grow and fill the available space */
-    /* max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px; */
   }
 
   h1 {
@@ -34,7 +25,6 @@ body {
 
   p {
     font-size: 1rem;
-    margin-bottom: 20px;
   }
 
   input[type="file"],
@@ -54,10 +44,6 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-
-  /* button:hover {
-    background-color: #ddd;
-  } */
 
   .bot {
     max-width: 90%;
@@ -91,6 +77,10 @@ body {
     padding-top: 5px;
   }
 
+  .btn-upload:hover .icon-image {
+    filter: brightness(0) invert(1); /* This will invert the colors of the icon when the button is hovered */
+  }
+
   @media screen and (max-width: 768px) {
     h1 {
       font-size: 1.5rem;
@@ -115,13 +105,11 @@ body {
 
   ::-webkit-scrollbar {
       width: 2px;
-      /* Set your desired width */
   }
 
   /* For Webkit browsers (Chrome, Safari) */
   ::-webkit-scrollbar-thumb {
       background-color: rgba(214, 206, 206, 0.849);
-      /* Set your desired color */
   }
 
   @media screen and (min-width: 1300px) {
@@ -159,7 +147,7 @@ body {
   .dot {
     width: 20px;
     height: 20px;
-    background-color: #34d399;
+    background-color: #2563EB;
     border-radius: 50%;
     margin: 0 8px;
     animation-duration: 1s;

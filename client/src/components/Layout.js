@@ -3,7 +3,7 @@ import React from "react";
 const Layout = ({ headerChildren, contentChildren }) => (
   <div className="flex">
     {/* Fixed Header/Navbar */}
-    <div className="w-full fixed top-0 bg-blue-600 text-white p-6 z-10 flex justify-between items-center">
+    <div className="w-full fixed top-0 bg-blue-600 text-white p-6 flex justify-between items-center">
       {headerChildren}
     </div>
     {/* Content */}

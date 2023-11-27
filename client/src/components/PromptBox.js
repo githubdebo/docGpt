@@ -38,7 +38,7 @@ const PromptBox = ({
           />
         
         {isDisabled && (
-          <span class="absolute top-10 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">
+          <span class="absolute scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100" style={{fontSize:"1rem"}}>
             Please upload file
           </span>
         )}
@@ -69,7 +69,7 @@ const PromptBox = ({
               </svg>
             </button>
             {isDisabled && (
-              <span class="absolute top-10 scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100">
+              <span class="absolute scale-0 rounded bg-gray-800 p-2 text-xs text-white group-hover:scale-100" style={{fontSize:"1rem"}}>
                 Please upload file
               </span>
             )}

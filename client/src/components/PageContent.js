@@ -6,9 +6,7 @@ import ButtonContainer from './ButtonContainer'
 import Button from './Button'
 import ResultWithSources from './ResultWithSources'
 import PromptBox from './PromptBox'
-//import handleApiRequest from '../api/api'
 import "../global.css"
-//import Alert from './Alert'
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
@@ -44,15 +42,23 @@ export const PageContent = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     let filePath=(event.target.value).split('\\');
-    setUploadFileName(filePath[filePath.length-1]);
-    setSelectedFile(file);
-    setIsUploadDisabled(false);
+
+    if (file && file.type === "application/pdf") {
+      setUploadFileName(filePath[filePath.length-1]);
+      setSelectedFile(file);
+      setIsUploadDisabled(false);
+    } else {
+      setIsUploadDisabled(true);
+      toast.info("Please upload a PDF file. Other file types are not supported.", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
   };
 
   function showSuccessNotification() {
     console.log("Toastr");
     toast.success("File uploaded successfully!", {
-      position: toast.POSITION.TOP_LEFT,
+      position: toast.POSITION.TOP_CENTER,
     });
   }
 
@@ -149,102 +155,109 @@ export const PageContent = () => {
   // The component returns a two column layout with various child components
   return (
     <>
-      {isLoading ? (
-        <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-gray-100 backdrop-blur-md opacity-80">
-          <div className="flex items-center mb-4">
-            <div className="dot animate-dot1"></div>
-            <div className="dot animate-dot2"></div>
-            <div className="dot animate-dot3"></div>
-          </div>
-          <p className="text-gray-600">Uploading file</p>
-        </div>
-      ) : (
-        <div>
-          <Layout
-            headerChildren={
-              <>
-                <ToastContainer/>
-                <PageHeader
-                  heading="Talk To Doc"
-                  //boldText="How to get rich? How to be happy?"
-                  description="This tool will let you ask anything contained in a document."
-                />
-                <ButtonContainer>
-                  {isUploadDisabled && (
-                    <label
-                      htmlFor="file-upload"
-                      className="text-white"
-                      style={{ fontSize: "14px", fontWeight: "bold" }}
-                    >
-                      Select a file
-                    </label>
-                  )}
-                  <input
-                    id="file-upload"
-                    type="file"
-                    className="hidden"
-                    onChange={handleFileChange}
-                  />
-                  <img
-                    src={attachment}
-                    width={32}
-                    height={32}
-                    className="rounded cursor-pointer hover:bg-gray-400 border-b-10"
-                    priority
-                    unoptimized
-                    onClick={() => {
-                      clickFileUpload();
-                    }}
-                  />
-                  <span
-                    style={{
-                      marginLeft: `${isUploadCompleted ? "10px" : ""}`,
-                      border: `${
-                        uploadFileName !== "" ? "1px solid white" : ""
-                      }`,
-                      borderRadius: "3px",
-                      padding: "3px",
-                      fontSize: "12px",
-                      fontWeight: "bold",
-                    }}
+      <div>
+        <Layout
+          headerChildren={
+            <>
+              <ToastContainer />
+              <PageHeader
+                heading="Talk To Doc"
+                //boldText="How to get rich? How to be happy?"
+                description="This tool will let you ask anything contained in a document."
+              />
+              <ButtonContainer>
+                {isUploadDisabled && (
+                  <label
+                    htmlFor="file-upload"
+                    className="text-white"
+                    style={{ fontSize: "14px", fontWeight: "bold", cursor:"pointer" }}
                   >
-                    {uploadFileName}
-                  </span>
-
-                  {!isUploadDisabled && (
-                    <Button
-                      handleSubmit={handleUpload}
-                      endpoint="pdf-upload"
-                      buttonText={<>
-                      {"Upload"}
-                        <img
-                          src={process.env.PUBLIC_URL + '/assets/images/uploadfile.png'}
-                          alt="Upload Icon"
-                          style={{ marginLeft: '5px', height: '20px', width: '20px' }}
-                        />
-                        
-                      </>}
-                    />
-                  )}
-                </ButtonContainer>
-              </>
-            }
-            contentChildren={
-              <>
-                <ResultWithSources messages={messages} pngFile="pdf" />
-                <PromptBox
-                  prompt={prompt}
-                  handlePromptChange={handlePromptChange}
-                  handleSubmit={() => handleSubmitPrompt("/pdf-query")}
-                  placeHolderText={"Please enter your question..."}
-                  error={error}
-                  isDisabled={isPromptDisabled}
+                    Select a file
+                  </label>
+                )}
+                <input
+                  id="file-upload"
+                  type="file"
+                  className="hidden"
+                  onChange={handleFileChange}
                 />
-              </>
-            }
-          />
-        </div>
-      )}
+                <img
+                  src={attachment}
+                  width={32}
+                  height={32}
+                  className="rounded cursor-pointer hover:bg-gray-400 border-b-10"
+                  priority
+                  unoptimized
+                  onClick={() => {
+                    clickFileUpload();
+                  }}
+                />
+                <span
+                  style={{
+                    marginLeft: `${isUploadCompleted ? "10px" : ""}`,
+                    border: `${uploadFileName !== "" ? "1px solid white" : ""}`,
+                    borderRadius: "3px",
+                    padding: "3px",
+                    fontSize: "12px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {uploadFileName}
+                </span>
+
+                {!isUploadDisabled && (
+                  <Button
+                    handleSubmit={handleUpload}
+                    endpoint="pdf-upload"
+                    buttonText={
+                      <>
+                        {"Upload"}
+                        <img
+                          className="icon-image"
+                          src={
+                            process.env.PUBLIC_URL +
+                            "/assets/images/uploadfile.png"
+                          }
+                          alt="Upload Icon"
+                          style={{
+                            marginLeft: "5px",
+                            height: "20px",
+                            width: "20px",
+                          }}
+                        />
+                      </>
+                    }
+                  />
+                )}
+              </ButtonContainer>
+            </>
+          }
+          contentChildren={
+            <>
+              <ResultWithSources messages={messages} pngFile="pdf" />
+              <PromptBox
+                prompt={prompt}
+                handlePromptChange={handlePromptChange}
+                handleSubmit={() => handleSubmitPrompt("/pdf-query")}
+                placeHolderText={"Please enter your question..."}
+                error={error}
+                isDisabled={isPromptDisabled}
+              />
+            </>
+          }
+        />
+
+        {isLoading && (
+          <div className="fixed top-0 left-0 w-full h-full flex flex-col items-center justify-center bg-gray-100 backdrop-blur-md opacity-80">
+            <div className="flex items-center mb-4">
+              <div className="dot animate-dot1"></div>
+              <div className="dot animate-dot2"></div>
+              <div className="dot animate-dot3"></div>
+            </div>
+            <p className="text-gray-600">Uploading file...</p>
+          </div>
+        )}
+      </div>
     </>
   );
 }
